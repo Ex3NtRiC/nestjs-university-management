@@ -15,14 +15,20 @@ export class StudentsService {
   ) {}
 
   async getStudents(): Promise<Student[]> {
-    const users = await this.studentModel.find().populate('lessons').exec();
+    const users = await this.studentModel.find();
     return users;
+  }
+  // async getStudents(): Promise<Student[]> {
+  //   const users = await this.studentModel.find().populate('lessons').exec();
+  //   return users;
+  // }
+
+  async getLessonsById(lessonsIds: string[]) {
+    return await this.lessonService.getLessonsById(lessonsIds);
   }
 
   async getStudentById(id: string): Promise<Student> {
-    return await (
-      await this.studentModel.findById(id).populate('lessons')
-    ).execPopulate();
+    return await await this.studentModel.findById(id);
   }
 
   async createStudent(createStudentsArgs: CreateStudentArgs): Promise<Student> {
@@ -33,11 +39,9 @@ export class StudentsService {
 
   async enrollStudent(enrollStudentArgs: EnrollStudentArgs): Promise<Student> {
     const { studentId, lessonId } = enrollStudentArgs;
-    const student: Student = await (
-      await this.studentModel.findById(studentId).populate('lessons')
-    ).execPopulate();
+    const student: Student = await this.studentModel.findById(studentId);
     const lesson: Lesson = await this.lessonService.getLessonById(lessonId);
-    student.lessons.push(lesson);
+    student.lessons.push(lesson._id);
     const s = await student.save();
     return s;
   }

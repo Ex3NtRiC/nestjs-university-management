@@ -1,6 +1,15 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import {
+  Args,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql';
+import { VariablesInAllowedPositionRule } from 'graphql';
 import { CreateStudentArgs } from './create-student.args';
 import { EnrollStudentArgs } from './entroll-student.args';
+import { Student } from './student.model';
 import { StudentType } from './student.type';
 import { StudentsService } from './students.service';
 
@@ -26,5 +35,10 @@ export class StudentResolver {
   @Mutation((returns) => StudentType)
   enrollStudent(@Args() enrollStudentArgs: EnrollStudentArgs) {
     return this.studentsService.enrollStudent(enrollStudentArgs);
+  }
+
+  @ResolveField()
+  async lessons(@Parent() students: Student) {
+    return await this.studentsService.getLessonsById(students.lessons);
   }
 }

@@ -23,4 +23,12 @@ export class LessonsService {
     const lesson: Lesson = new this.lessonModel({ name, startDate, endDate });
     return await lesson.save();
   }
+
+  async getLessonsById(lessonsId: string[]) {
+    const lessons = await this.lessonModel.find({
+      _id: { $in: lessonsId },
+    });
+    console.log(lessons);
+    return lessons;
+  }
 }

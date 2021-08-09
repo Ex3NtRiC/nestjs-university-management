@@ -22,5 +22,5 @@ export interface Student extends Document {
   [x: string]: any;
   firstName: string;
   lastName: string;
-  lessons: Lesson[];
+  lessons: string[];
 }
