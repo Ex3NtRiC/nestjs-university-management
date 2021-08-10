@@ -1,6 +1,6 @@
-import { Schema, Document, Types } from 'mongoose';
+import { Schema, Types, Document } from 'mongoose';
 
-export const StudentSchema = new Schema({
+export const TeacherSchema = new Schema({
   email: {
     type: String,
     required: true,
@@ -21,7 +21,7 @@ export const StudentSchema = new Schema({
   ],
 });
 
-export interface Student extends Document {
+export interface Teacher extends Document {
   email: string;
   firstName: string;
   lastName: string;

@@ -6,7 +6,6 @@ import {
   ResolveField,
   Resolver,
 } from '@nestjs/graphql';
-import { VariablesInAllowedPositionRule } from 'graphql';
 import { CreateStudentArgs } from './create-student.args';
 import { EnrollStudentArgs } from './entroll-student.args';
 import { Student } from './student.model';

@@ -2,7 +2,7 @@ import { ArgsType, Field } from '@nestjs/graphql';
 import { IsEmail, IsNotEmpty, MaxLength, MinLength } from 'class-validator';
 
 @ArgsType()
-export class CreateStudentArgs {
+export class CreateTeacherArgs {
   @IsNotEmpty()
   @IsEmail()
   @Field()

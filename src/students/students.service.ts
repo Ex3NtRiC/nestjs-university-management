@@ -28,12 +28,16 @@ export class StudentsService {
   }
 
   async getStudentById(id: string): Promise<Student> {
-    return await await this.studentModel.findById(id);
+    return await this.studentModel.findById(id);
+  }
+
+  async getStudentByEmail(email: string): Promise<Student> {
+    return await this.studentModel.findOne({ email });
   }
 
   async createStudent(createStudentsArgs: CreateStudentArgs): Promise<Student> {
-    const { firstName, lastName } = createStudentsArgs;
-    const student = new this.studentModel({ firstName, lastName });
+    const { email, firstName, lastName } = createStudentsArgs;
+    const student = new this.studentModel({ email, firstName, lastName });
     return await student.save();
   }
 
