@@ -24,7 +24,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     if (role === roles.ROLE_Student) {
       person = await this.studentsService.getStudentByEmail(email);
     } else if (role === roles.ROLE_Teacher) {
-      //   const user: User = await this.usersRepository.findOne({ username });
+      person = await this.studentsService.getStudentByEmail(email);
+    } else if (role === roles.ROLE_HR) {
       person = await this.studentsService.getStudentByEmail(email);
     }
     if (!person) {

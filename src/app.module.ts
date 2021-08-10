@@ -5,6 +5,7 @@ import { LessonsModule } from './HR/lessons/lessons.module';
 import { StudentsModule } from './HR/students/students.module';
 import { AuthModule } from './auth/auth.module';
 import { TeachersModule } from './HR/teachers/teachers.module';
+import { HRModule } from './HR/hr.module';
 
 @Module({
   imports: [
@@ -14,8 +15,9 @@ import { TeachersModule } from './HR/teachers/teachers.module';
     GraphQLModule.forRoot({ autoSchemaFile: true }),
     LessonsModule,
     StudentsModule,
-    // AuthModule,
+    AuthModule,
     TeachersModule,
+    HRModule,
   ],
   controllers: [],
   providers: [],
