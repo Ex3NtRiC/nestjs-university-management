@@ -1,12 +1,6 @@
 import { ArgsType, Field } from '@nestjs/graphql';
-import {
-  IsEmail,
-  IsEnum,
-  IsNotEmpty,
-  MaxLength,
-  MinLength,
-} from 'class-validator';
-import { Faculties } from '../lessons/faculties-enum';
+import { IsEnum, IsNotEmpty, MaxLength, MinLength } from 'class-validator';
+import { Faculties } from './faculties-enum';
 
 @ArgsType()
 export class CreateTeacherArgs {

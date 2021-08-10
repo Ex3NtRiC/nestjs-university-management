@@ -7,9 +7,9 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Lesson } from 'src/HR/lessons/lesson.model';
 import { LessonsService } from 'src/HR/lessons/lessons.service';
-import { Faculties } from '../lessons/faculties-enum';
-import { CreateTeacherArgs } from './create-teacher.args';
-import { EnrollTeacherArgs } from './enroll-teacher.args';
+import { Faculties } from '../Args/faculties-enum';
+import { CreateTeacherArgs } from '../Args/create-teacher.args';
+import { EnrollTeacherArgs } from '../Args/enroll-teacher.args';
 import { Teacher } from './teacher.model';
 
 @Injectable()
@@ -67,8 +67,18 @@ export class TeachersService {
     const teachers = await this.teacherModel.find({
       email: { $regex: '.*' + email + '.*', $options: 'i' },
     });
-    if (teachers) {
+    if (teachers.length > 0) {
       return teachers;
+    }
+    throw new NotFoundException();
+  }
+
+  async getTeacherByEmail(email: string): Promise<Teacher> {
+    const teacher = await this.teacherModel.findOne({
+      email,
+    });
+    if (teacher) {
+      return teacher;
     }
     throw new NotFoundException();
   }
@@ -88,7 +98,7 @@ export class TeachersService {
     const e = (
       firstName.charAt(0) +
       lastName +
-      '@birzeit.edu'
+      '@school.edu'
     ).toLocaleLowerCase();
     const teacher = new this.teacherModel({
       faculty,

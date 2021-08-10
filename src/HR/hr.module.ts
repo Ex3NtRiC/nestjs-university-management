@@ -7,6 +7,6 @@ import { HRService } from './hr.service';
 @Module({
   imports: [MongooseModule.forFeature([{ name: 'HR', schema: HRSchema }])],
   providers: [HRService, HRResolver],
-  exports: [],
+  exports: [HRService],
 })
 export class HRModule {}

@@ -1,5 +1,5 @@
 import { Schema, Types, Document } from 'mongoose';
-import { Faculties } from '../lessons/faculties-enum';
+import { Faculties } from '../Args/faculties-enum';
 
 export const TeacherSchema = new Schema({
   email: {
@@ -24,6 +24,10 @@ export const TeacherSchema = new Schema({
       ref: 'Lesson',
     },
   ],
+  active: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 export interface Teacher extends Document {
@@ -32,4 +36,5 @@ export interface Teacher extends Document {
   lastName: string;
   faculty: Faculties;
   lessons: string[];
+  active: boolean;
 }

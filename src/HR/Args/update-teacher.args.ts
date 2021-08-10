@@ -1,6 +1,6 @@
 import { ArgsType, Field } from '@nestjs/graphql';
 import { IsEnum, IsOptional, MaxLength, MinLength } from 'class-validator';
-import { Faculties } from '../lessons/faculties-enum';
+import { Faculties } from './faculties-enum';
 
 @ArgsType()
 export class UpdateTeacherArgs {

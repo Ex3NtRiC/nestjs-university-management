@@ -16,6 +16,10 @@ export const HRSchema = new Schema({
     type: String,
     required: true,
   },
+  active: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 export interface HR extends Document {
@@ -23,4 +27,5 @@ export interface HR extends Document {
   passowrd: string;
   firstName: string;
   lastName: string;
+  active: boolean;
 }

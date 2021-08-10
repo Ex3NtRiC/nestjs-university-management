@@ -2,10 +2,10 @@ import { NotFoundException } from '@nestjs/common';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CreateLessonArgs } from './create-lesson.args';
-import { Faculties } from './faculties-enum';
+import { CreateLessonArgs } from '../Args/create-lesson.args';
+import { Faculties } from '../Args/faculties-enum';
 import { Lesson } from './lesson.model';
-import { UpdateLessonArgs } from './update-lesson.args';
+import { UpdateLessonArgs } from '../Args/update-lesson.args';
 
 @Injectable()
 export class LessonsService {

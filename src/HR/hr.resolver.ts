@@ -1,6 +1,6 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { of } from 'rxjs';
-import { CreateHRArgs } from './create-hr.args';
+import { CreateHRArgs } from './Args/create-hr.args';
 import { HRService } from './hr.service';
 import { HRType } from './hr.type';
 

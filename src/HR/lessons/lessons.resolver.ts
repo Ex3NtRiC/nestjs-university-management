@@ -1,9 +1,9 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { CreateLessonArgs } from './create-lesson.args';
-import { Faculties } from './faculties-enum';
+import { CreateLessonArgs } from '../Args/create-lesson.args';
+import { Faculties } from '../Args/faculties-enum';
 import { LessonType } from './lesson.type';
 import { LessonsService } from './lessons.service';
-import { UpdateLessonArgs } from './update-lesson.args';
+import { UpdateLessonArgs } from '../Args/update-lesson.args';
 
 @Resolver((of) => LessonType)
 export class LessonResolver {

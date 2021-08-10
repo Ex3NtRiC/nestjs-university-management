@@ -1,9 +1,12 @@
 import { UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
+import { HR } from 'src/HR/hr.model';
+import { HRService } from 'src/HR/hr.service';
 import { LessonsService } from 'src/HR/lessons/lessons.service';
 import { Student } from 'src/HR/students/student.model';
 import { StudentsService } from 'src/HR/students/students.service';
+import { Teacher } from 'src/HR/teachers/teacher.model';
 import { JwtPayload } from './jwt-payload.interface';
 import { roles } from './roles.enum';
 
@@ -11,6 +14,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
     private readonly lessonsService: LessonsService,
     private readonly studentsService: StudentsService,
+    private readonly hrService: HRService,
   ) {
     super({
       secretOrKey: 'JWT_SECRET',
@@ -20,13 +24,13 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
   async validate(payload: JwtPayload): Promise<any> {
     const { email, role } = payload;
-    let person: Student;
+    let person: Student | Teacher | HR;
     if (role === roles.ROLE_Student) {
       person = await this.studentsService.getStudentByEmail(email);
     } else if (role === roles.ROLE_Teacher) {
       person = await this.studentsService.getStudentByEmail(email);
     } else if (role === roles.ROLE_HR) {
-      person = await this.studentsService.getStudentByEmail(email);
+      person = await this.hrService.getHRByEmail(email);
     }
     if (!person) {
       throw new UnauthorizedException();

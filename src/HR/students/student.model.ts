@@ -26,6 +26,10 @@ export const StudentSchema = new Schema({
       ref: 'Lesson',
     },
   ],
+  active: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 export interface Student extends Document {
@@ -35,4 +39,5 @@ export interface Student extends Document {
   firstName: string;
   lastName: string;
   lessons: string[];
+  active: boolean;
 }
