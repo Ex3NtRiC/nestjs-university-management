@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Lesson } from 'src/lessons/lesson.model';
-import { LessonsService } from 'src/lessons/lessons.service';
+import { Lesson } from 'src/HR/lessons/lesson.model';
+import { LessonsService } from 'src/HR/lessons/lessons.service';
 import { CreateTeacherArgs } from './create-teacher.args';
 import { EnrollTeacherArgs } from './enroll-teacher.args';
 import { Teacher } from './teacher.model';

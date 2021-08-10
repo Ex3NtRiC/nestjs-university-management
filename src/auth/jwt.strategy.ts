@@ -1,9 +1,9 @@
 import { UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { LessonsService } from 'src/lessons/lessons.service';
-import { Student } from 'src/students/student.model';
-import { StudentsService } from 'src/students/students.service';
+import { LessonsService } from 'src/HR/lessons/lessons.service';
+import { Student } from 'src/HR/students/student.model';
+import { StudentsService } from 'src/HR/students/students.service';
 import { JwtPayload } from './jwt-payload.interface';
 import { roles } from './roles.enum';
 

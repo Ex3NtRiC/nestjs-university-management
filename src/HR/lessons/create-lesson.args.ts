@@ -1,11 +1,12 @@
 import { ArgsType, Field } from '@nestjs/graphql';
 import {
+  IsEnum,
   IsNotEmpty,
   IsString,
   MaxLength,
   MinLength,
-  IsDateString,
 } from 'class-validator';
+import { Faculties } from './faculties-enum';
 
 @ArgsType()
 export class CreateLessonArgs {
@@ -16,11 +17,18 @@ export class CreateLessonArgs {
   @Field()
   name: string;
 
-  @IsDateString()
+  @MinLength(3)
+  @MaxLength(30)
+  @IsNotEmpty()
+  @IsEnum(Faculties)
   @Field()
-  startDate: string;
+  faculty: Faculties;
 
-  @IsDateString()
+  @IsNotEmpty()
   @Field()
-  endDate: string;
+  credits: number;
+
+  @IsNotEmpty()
+  @Field()
+  code: string;
 }

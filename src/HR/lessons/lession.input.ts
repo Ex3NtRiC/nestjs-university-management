@@ -9,11 +9,17 @@ export class CreateLessonInput {
   @Field()
   name: string;
 
-  @IsDateString()
+  @IsNotEmpty()
   @Field()
-  startDate: string;
+  code: string;
 
-  @IsDateString()
+  @IsNotEmpty()
   @Field()
-  endDate: string;
+  department: string;
+
+  @IsNotEmpty()
+  @Field()
+  credits: number;
 }
+
+//Args is a better way in graphql than Input

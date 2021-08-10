@@ -1,22 +1,28 @@
 import { Schema, Document } from 'mongoose';
+import { Faculties } from './faculties-enum';
 
 export const LessonSchema = new Schema({
   name: {
     type: String,
     required: true,
   },
-  startDate: {
+  code: {
     type: String,
     required: true,
   },
-  endDate: {
-    type: String,
+  faculty: {
+    type: Faculties,
+    required: true,
+  },
+  credits: {
+    type: Number,
     required: true,
   },
 });
 
 export interface Lesson extends Document {
   name: string;
-  startDate: string;
-  endDate: string;
+  code: string;
+  faculty: Faculties;
+  credits: number;
 }

@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { MongooseModule } from '@nestjs/mongoose';
-import { LessonsModule } from './lessons/lessons.module';
-import { StudentsModule } from './students/students.module';
+import { LessonsModule } from './HR/lessons/lessons.module';
+import { StudentsModule } from './HR/students/students.module';
 import { AuthModule } from './auth/auth.module';
-import { TeachersModule } from './teachers/teachers.module';
+import { TeachersModule } from './HR/teachers/teachers.module';
 
 @Module({
   imports: [

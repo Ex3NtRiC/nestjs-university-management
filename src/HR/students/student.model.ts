@@ -5,6 +5,9 @@ export const StudentSchema = new Schema({
     type: String,
     required: true,
   },
+  password: {
+    type: String,
+  },
   firstName: {
     type: String,
     required: true,
@@ -23,6 +26,7 @@ export const StudentSchema = new Schema({
 
 export interface Student extends Document {
   email: string;
+  passowrd: string;
   firstName: string;
   lastName: string;
   lessons: string[];
