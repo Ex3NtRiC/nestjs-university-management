@@ -4,11 +4,6 @@ import { IsEmail, IsNotEmpty, MaxLength, MinLength } from 'class-validator';
 @ArgsType()
 export class CreateStudentArgs {
   @IsNotEmpty()
-  @IsEmail()
-  @Field()
-  email: string;
-
-  @IsNotEmpty()
   @MinLength(3)
   @MaxLength(30)
   @Field()

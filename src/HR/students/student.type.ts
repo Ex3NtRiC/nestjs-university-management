@@ -7,6 +7,9 @@ export class StudentType {
   id: string;
 
   @Field()
+  studentID: number;
+
+  @Field()
   email: string;
 
   @Field()

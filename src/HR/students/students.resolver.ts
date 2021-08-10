@@ -11,6 +11,7 @@ import { EnrollStudentArgs } from './entroll-student.args';
 import { Student } from './student.model';
 import { StudentType } from './student.type';
 import { StudentsService } from './students.service';
+import { UpdateStudentArgs } from './update-student.args';
 
 @Resolver((of) => StudentType)
 export class StudentResolver {
@@ -26,9 +27,37 @@ export class StudentResolver {
     return this.studentsService.getStudentById(id);
   }
 
+  @Query((returns) => StudentType)
+  getStudentByStudentId(@Args('id') id: number) {
+    return this.studentsService.getStudentByStudentId(id);
+  }
+
+  @Query((returns) => StudentType)
+  getStudentByEmail(@Args('email') email: string) {
+    return this.studentsService.getStudentByEmail(email);
+  }
+
+  @Query((returns) => [StudentType])
+  getStudentByName(@Args('name') name: string) {
+    return this.studentsService.getStudentsByName(name);
+  }
+
+  @Query((returns) => [StudentType])
+  getStudentsByLesson(@Args('lessonCode') code: string) {
+    return this.studentsService.getStudentsByLesson(code);
+  }
+
   @Mutation((returns) => StudentType)
   createStudent(@Args() createStudentArgs: CreateStudentArgs) {
     return this.studentsService.createStudent(createStudentArgs);
+  }
+
+  @Mutation((returns) => StudentType)
+  updateStudent(
+    @Args('studentID') studentID: number,
+    @Args() updateStudentArgs: UpdateStudentArgs,
+  ) {
+    return this.studentsService.updateStudent(studentID, updateStudentArgs);
   }
 
   @Mutation((returns) => StudentType)

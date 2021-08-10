@@ -3,8 +3,8 @@ import { ArgsType, Field } from '@nestjs/graphql';
 @ArgsType()
 export class EnrollStudentArgs {
   @Field()
-  studentId: string;
+  studentID: number;
 
   @Field()
-  lessonId: string;
+  lessonCode: string;
 }

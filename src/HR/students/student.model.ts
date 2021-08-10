@@ -1,6 +1,10 @@
 import { Schema, Document, Types } from 'mongoose';
 
 export const StudentSchema = new Schema({
+  studentID: {
+    type: Number,
+    required: true,
+  },
   email: {
     type: String,
     required: true,
@@ -25,6 +29,7 @@ export const StudentSchema = new Schema({
 });
 
 export interface Student extends Document {
+  studentID: number;
   email: string;
   passowrd: string;
   firstName: string;

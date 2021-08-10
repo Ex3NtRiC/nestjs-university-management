@@ -1,4 +1,5 @@
 import { Schema, Types, Document } from 'mongoose';
+import { Faculties } from '../lessons/faculties-enum';
 
 export const TeacherSchema = new Schema({
   email: {
@@ -13,6 +14,10 @@ export const TeacherSchema = new Schema({
     type: String,
     required: true,
   },
+  faculty: {
+    type: Faculties,
+    required: true,
+  },
   lessons: [
     {
       type: Types.ObjectId,
@@ -25,5 +30,6 @@ export interface Teacher extends Document {
   email: string;
   firstName: string;
   lastName: string;
+  faculty: Faculties;
   lessons: string[];
 }

@@ -6,11 +6,13 @@ import {
   ResolveField,
   Resolver,
 } from '@nestjs/graphql';
+import { Faculties } from '../lessons/faculties-enum';
 import { CreateTeacherArgs } from './create-teacher.args';
 import { EnrollTeacherArgs } from './enroll-teacher.args';
 import { Teacher } from './teacher.model';
 import { TeacherType } from './teacher.type';
 import { TeachersService } from './teachers.service';
+import { UpdateTeacherArgs } from './update-teacher.args';
 
 @Resolver((of) => TeacherType)
 export class TeachersResolver {
@@ -26,9 +28,32 @@ export class TeachersResolver {
     return this.teachersService.getTeacherById(id);
   }
 
+  @Query((returns) => [TeacherType])
+  getTeachersByFaculty(@Args('faculty') faculty: Faculties) {
+    return this.teachersService.getTeachersByFaculty(faculty);
+  }
+
+  @Query((returns) => [TeacherType])
+  getTeacherByEmail(@Args('email') email: string) {
+    return this.teachersService.getTeachersByEmail(email);
+  }
+
+  @Query((returns) => [TeacherType])
+  getTeachersByLesson(@Args('lessonCode') code: string) {
+    return this.teachersService.getTeachersByLesson(code);
+  }
+
   @Mutation((returns) => TeacherType)
   createTeacher(@Args() createStudentArgs: CreateTeacherArgs) {
     return this.teachersService.createTeacher(createStudentArgs);
+  }
+
+  @Mutation((returns) => TeacherType)
+  updateTeacher(
+    @Args('email') email: string,
+    @Args() updateTeacherArgs: UpdateTeacherArgs,
+  ) {
+    return this.teachersService.updateTeacher(email, updateTeacherArgs);
   }
 
   @Mutation((returns) => TeacherType)
