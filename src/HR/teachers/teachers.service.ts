@@ -5,12 +5,12 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Lesson } from 'src/HR/lessons/lesson.model';
+import { Lesson } from '../../models/lesson.model';
 import { LessonsService } from 'src/HR/lessons/lessons.service';
 import { Faculties } from '../Args/faculties-enum';
 import { CreateTeacherArgs } from '../Args/create-teacher.args';
 import { EnrollTeacherArgs } from '../Args/enroll-teacher.args';
-import { Teacher } from './teacher.model';
+import { Teacher } from '../../models/teacher.model';
 
 @Injectable()
 export class TeachersService {

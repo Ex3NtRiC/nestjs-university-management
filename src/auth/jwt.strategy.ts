@@ -4,9 +4,9 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { HR } from 'src/HR/hr.model';
 import { HRService } from 'src/HR/hr.service';
 import { LessonsService } from 'src/HR/lessons/lessons.service';
-import { Student } from 'src/HR/students/student.model';
+import { Student } from '../models/student.model';
 import { StudentsService } from 'src/HR/students/students.service';
-import { Teacher } from 'src/HR/teachers/teacher.model';
+import { Teacher } from '../models/teacher.model';
 import { JwtPayload } from './jwt-payload.interface';
 import { roles } from './roles.enum';
 
@@ -23,6 +23,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: JwtPayload): Promise<any> {
+    console.log(payload);
     const { email, role } = payload;
     let person: Student | Teacher | HR;
     if (role === roles.ROLE_Student) {

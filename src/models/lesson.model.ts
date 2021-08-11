@@ -1,5 +1,5 @@
 import { Schema, Document } from 'mongoose';
-import { Faculties } from '../Args/faculties-enum';
+import { Faculties } from '../HR/Args/faculties-enum';
 
 export const LessonSchema = new Schema({
   name: {

@@ -2,9 +2,9 @@ import { NotFoundException } from '@nestjs/common';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { Lesson } from '../../models/lesson.model';
 import { CreateLessonArgs } from '../Args/create-lesson.args';
 import { Faculties } from '../Args/faculties-enum';
-import { Lesson } from './lesson.model';
 import { UpdateLessonArgs } from '../Args/update-lesson.args';
 
 @Injectable()
