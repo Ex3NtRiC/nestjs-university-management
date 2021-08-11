@@ -1,7 +1,7 @@
 import { UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { HR } from 'src/HR/hr.model';
+import { HR } from 'src/models/hr.model';
 import { HRService } from 'src/HR/hr.service';
 import { LessonsService } from 'src/HR/lessons/lessons.service';
 import { Student } from '../models/student.model';

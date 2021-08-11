@@ -1,5 +1,5 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-import { Faculties } from '../Args/faculties-enum';
+import { Faculties } from '../../models/Args/faculties-enum';
 
 @ObjectType('Lesson')
 export class LessonType {

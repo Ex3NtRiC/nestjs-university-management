@@ -1,15 +1,11 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
 import { LessonsModule } from 'src/HR/lessons/lessons.module';
-import { TeacherSchema } from '../../models/teacher.model';
+import { ModelsModule } from 'src/models/models.module';
 import { TeachersResolver } from './teachers.resolver';
 import { TeachersService } from './teachers.service';
 
 @Module({
-  imports: [
-    MongooseModule.forFeature([{ name: 'Teacher', schema: TeacherSchema }]),
-    LessonsModule,
-  ],
+  imports: [ModelsModule, LessonsModule],
   providers: [TeachersResolver, TeachersService],
   exports: [TeachersService],
 })

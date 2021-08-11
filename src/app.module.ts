@@ -6,6 +6,7 @@ import { StudentsModule } from './HR/students/students.module';
 import { AuthModule } from './auth/auth.module';
 import { TeachersModule } from './HR/teachers/teachers.module';
 import { HRModule } from './HR/hr.module';
+import { ModelsModule } from './models/models.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { HRModule } from './HR/hr.module';
     AuthModule,
     TeachersModule,
     HRModule,
+    ModelsModule,
   ],
   controllers: [],
   providers: [],

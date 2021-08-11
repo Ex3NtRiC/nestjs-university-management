@@ -6,13 +6,13 @@ import {
   ResolveField,
   Resolver,
 } from '@nestjs/graphql';
-import { Faculties } from '../Args/faculties-enum';
-import { CreateTeacherArgs } from '../Args/create-teacher.args';
-import { EnrollTeacherArgs } from '../Args/enroll-teacher.args';
+import { Faculties } from '../../models/Args/faculties-enum';
+import { CreateTeacherArgs } from '../../models/Args/create-teacher.args';
+import { EnrollTeacherArgs } from '../../models/Args/enroll-teacher.args';
 import { Teacher } from '../../models/teacher.model';
 import { TeacherType } from './teacher.type';
 import { TeachersService } from './teachers.service';
-import { UpdateTeacherArgs } from '../Args/update-teacher.args';
+import { UpdateTeacherArgs } from '../../models/Args/update-teacher.args';
 
 @Resolver((of) => TeacherType)
 export class TeachersResolver {

@@ -1,111 +1,50 @@
-import { NotFoundException } from '@nestjs/common';
 import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { LessonModelService } from 'src/models/lesson-model.service';
 import { Lesson } from '../../models/lesson.model';
-import { CreateLessonArgs } from '../Args/create-lesson.args';
-import { Faculties } from '../Args/faculties-enum';
-import { UpdateLessonArgs } from '../Args/update-lesson.args';
+import { CreateLessonArgs } from '../../models/Args/create-lesson.args';
+import { Faculties } from '../../models/Args/faculties-enum';
+import { UpdateLessonArgs } from '../../models/Args/update-lesson.args';
 
 @Injectable()
 export class LessonsService {
-  constructor(
-    @InjectModel('Lesson') private readonly lessonModel: Model<Lesson>,
-  ) {}
+  constructor(private readonly lessonModelService: LessonModelService) {}
 
   async getLessons(): Promise<Lesson[]> {
-    const res = await this.lessonModel.find();
-    if (res.length > 0) {
-      return res;
-    }
-    throw new NotFoundException();
+    return this.lessonModelService.getLessons();
   }
 
   async getLessonById(id: string): Promise<Lesson> {
-    const res = await this.lessonModel.findById(id);
-    if (res) {
-      return res;
-    }
-    throw new NotFoundException();
+    return this.lessonModelService.getLessonById(id);
   }
 
   async getLessonByCode(code: string): Promise<Lesson> {
-    const res = await this.lessonModel.findOne({ code });
-    if (res) {
-      return res;
-    }
-    throw new NotFoundException();
+    return this.lessonModelService.getLessonByCode(code);
   }
 
   async getLessonsByName(name: string): Promise<Lesson[]> {
-    const res = await this.lessonModel.find({
-      name: { $regex: '.*' + name + '.*', $options: 'i' },
-    });
-    if (res.length > 0) {
-      return res;
-    }
-    throw new NotFoundException();
+    return this.lessonModelService.getLessonsByName(name);
   }
 
   async getLessonsByFaculty(faculty: Faculties): Promise<Lesson[]> {
-    const res = await this.lessonModel.find({ faculty: faculty });
-    if (res.length > 0) {
-      return res;
-    }
-    throw new NotFoundException();
+    return this.lessonModelService.getLessonsByFaculty(faculty);
   }
 
   async createLesson(createLessonArgs: CreateLessonArgs): Promise<Lesson> {
-    const { name, code, faculty, credits } = createLessonArgs;
-    const lesson: Lesson = new this.lessonModel({
-      name,
-      credits,
-      code,
-      faculty,
-    });
-    return await lesson.save();
+    return this.lessonModelService.createLesson(createLessonArgs);
   }
 
   async updateLesson(
     id: string,
     updateLessonArgs: UpdateLessonArgs,
   ): Promise<Lesson> {
-    const lesson = await this.lessonModel.findById(id);
-    if (!lesson) {
-      throw new NotFoundException();
-    }
-    const { name, credits, code, faculty } = updateLessonArgs;
-    if (name) {
-      lesson.name = name;
-    }
-    if (credits) {
-      lesson.credits = credits;
-    }
-    if (code) {
-      lesson.code = code;
-    }
-    if (faculty) {
-      lesson.faculty = faculty;
-    }
-    return await lesson.save();
+    return this.lessonModelService.updateLesson(id, updateLessonArgs);
   }
 
   async deleteLesson(id: string): Promise<boolean> {
-    try {
-      const res = await this.lessonModel.findByIdAndDelete(id);
-      if (res) {
-        return true;
-      }
-      throw new NotFoundException();
-    } catch (err) {
-      throw new NotFoundException();
-    }
+    return this.lessonModelService.deleteLesson(id);
   }
 
   async getLessonsById(lessonsId: string[]) {
-    const lessons = await this.lessonModel.find({
-      _id: { $in: lessonsId },
-    });
-    return lessons;
+    return this.lessonModelService.getLessonsById(lessonsId);
   }
 }

@@ -12,7 +12,7 @@ import { AuthCredentialsDto } from './Args/auth-credentials.args';
 import { hash, compare } from 'bcrypt';
 import { Teacher } from '../models/teacher.model';
 import { Student } from '../models/student.model';
-import { HR } from 'src/HR/hr.model';
+import { HR } from 'src/models/hr.model';
 import { JwtPayload } from './jwt-payload.interface';
 import { roles } from './roles.enum';
 
