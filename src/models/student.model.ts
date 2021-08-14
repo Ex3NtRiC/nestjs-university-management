@@ -1,4 +1,5 @@
 import { Schema, Document, Types } from 'mongoose';
+import { Role } from 'src/auth/role.enum';
 
 export const StudentSchema = new Schema({
   studentID: {
@@ -26,6 +27,7 @@ export const StudentSchema = new Schema({
       ref: 'Lesson',
     },
   ],
+  roles: [{ type: String, required: true }],
   active: {
     type: Boolean,
     default: false,
@@ -39,5 +41,6 @@ export interface Student extends Document {
   firstName: string;
   lastName: string;
   lessons: string[];
+  roles: Role[];
   active: boolean;
 }

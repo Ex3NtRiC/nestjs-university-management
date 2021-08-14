@@ -1,4 +1,5 @@
 import { Schema, Types, Document } from 'mongoose';
+import { Role } from 'src/auth/role.enum';
 import { Faculties } from './Args/faculties-enum';
 
 export const TeacherSchema = new Schema({
@@ -24,6 +25,7 @@ export const TeacherSchema = new Schema({
       ref: 'Lesson',
     },
   ],
+  roles: [{ type: String, required: true }],
   active: {
     type: Boolean,
     default: false,
@@ -36,5 +38,6 @@ export interface Teacher extends Document {
   lastName: string;
   faculty: Faculties;
   lessons: string[];
+  roles: Role[];
   active: boolean;
 }

@@ -1,6 +1,4 @@
 import { Field, ObjectType } from '@nestjs/graphql';
-import { roles } from './roles.enum';
-
 @ObjectType()
 export class AuthType {
   @Field()
@@ -8,8 +6,8 @@ export class AuthType {
 
   password: string;
 
-  @Field()
-  role: roles;
+  @Field((type) => [String])
+  roles: string[];
 
   @Field()
   firstName: string;

@@ -20,4 +20,7 @@ export class StudentType {
 
   @Field((type) => [LessonType])
   lessons: LessonType[];
+
+  @Field((type) => [String])
+  roles: string[];
 }

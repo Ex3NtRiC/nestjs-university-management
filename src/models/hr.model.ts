@@ -1,4 +1,5 @@
 import { Schema, Document } from 'mongoose';
+import { Role } from 'src/auth/role.enum';
 
 export const HRSchema = new Schema({
   email: {
@@ -16,6 +17,7 @@ export const HRSchema = new Schema({
     type: String,
     required: true,
   },
+  roles: [{ type: String, required: true }],
   active: {
     type: Boolean,
     default: false,
@@ -27,5 +29,6 @@ export interface HR extends Document {
   passowrd: string;
   firstName: string;
   lastName: string;
+  roles: Role[];
   active: boolean;
 }

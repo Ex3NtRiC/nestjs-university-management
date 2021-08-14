@@ -1,12 +1,20 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
+import { AuthModule } from 'src/auth/auth.module';
 import { ModelsModule } from 'src/models/models.module';
-import { HRSchema } from '../models/hr.model';
 import { HRResolver } from './hr.resolver';
 import { HRService } from './hr.service';
+import { LessonsModule } from './lessons/lessons.module';
+import { StudentsModule } from './students/students.module';
+import { TeachersModule } from './teachers/teachers.module';
 
 @Module({
-  imports: [ModelsModule],
+  imports: [
+    ModelsModule,
+    LessonsModule,
+    StudentsModule,
+    TeachersModule,
+    AuthModule,
+  ],
   providers: [HRService, HRResolver],
   exports: [HRService],
 })

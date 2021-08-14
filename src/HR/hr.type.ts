@@ -10,4 +10,7 @@ export class HRType {
 
   @Field()
   lastName: string;
+
+  @Field((type) => [String])
+  roles: string[];
 }

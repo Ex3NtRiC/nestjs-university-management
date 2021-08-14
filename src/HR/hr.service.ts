@@ -12,6 +12,11 @@ export class HRService {
   }
 
   async getHRByEmail(email: string): Promise<HR> {
-    return this.hrModelService.getHRByEmail(email);
+    console.log('hr.service');
+    return await this.hrModelService.getHRByEmail(email);
+  }
+
+  async getHRs(): Promise<HR[]> {
+    return this.hrModelService.getHRs();
   }
 }

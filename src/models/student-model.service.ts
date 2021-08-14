@@ -5,8 +5,8 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { Role } from 'src/auth/role.enum';
 import { CreateStudentArgs } from './Args/create-student.args';
-import { EnrollStudentArgs } from './Args/entroll-student.args';
 import { Lesson } from './lesson.model';
 import { Student } from './student.model';
 
@@ -85,6 +85,7 @@ export class StudentModelService {
       firstName,
       lastName,
       studentID: id,
+      roles: [Role.Student],
     });
     return await student.save();
   }
