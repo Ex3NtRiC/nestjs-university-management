@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { HRModelService } from 'src/models/hr-model.service';
+import { HRModelService } from 'src/models/HR-Model/hr-model.service';
 import { CreateHRArgs } from '../models/Args/create-hr.args';
-import { HR } from '../models/hr.model';
+import { HR } from '../models/HR-Model/hr.model';
 
 @Injectable()
 export class HRService {

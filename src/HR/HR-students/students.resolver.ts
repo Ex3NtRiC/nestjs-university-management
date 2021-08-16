@@ -8,14 +8,14 @@ import {
 } from '@nestjs/graphql';
 import { CreateStudentArgs } from '../../models/Args/create-student.args';
 import { EnrollStudentArgs } from '../../models/Args/entroll-student.args';
-import { Student } from '../../models/student.model';
-import { StudentType } from './student.type';
-import { StudentsService } from './students.service';
+import { Student } from 'src/models/Students-Model/student.model';
+import { StudentType } from 'src/models/Students-Model/student.type';
+import { HRStudentsService } from './HR-students.service';
 import { UpdateStudentArgs } from '../../models/Args/update-student.args';
 
 @Resolver((of) => StudentType)
 export class StudentResolver {
-  constructor(private readonly studentsService: StudentsService) {}
+  constructor(private readonly studentsService: HRStudentsService) {}
 
   @Query((returns) => [StudentType])
   getStudents() {

@@ -6,8 +6,8 @@ import {
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Role } from 'src/auth/role.enum';
-import { CreateStudentArgs } from './Args/create-student.args';
-import { Lesson } from './lesson.model';
+import { CreateStudentArgs } from '../Args/create-student.args';
+import { Lesson } from '../Lessons-Model/lesson.model';
 import { Student } from './student.model';
 
 @Injectable()

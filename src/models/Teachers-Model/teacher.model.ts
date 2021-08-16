@@ -1,6 +1,6 @@
 import { Schema, Types, Document } from 'mongoose';
 import { Role } from 'src/auth/role.enum';
-import { Faculties } from './Args/faculties-enum';
+import { Faculties } from '../Args/faculties-enum';
 
 export const TeacherSchema = new Schema({
   email: {

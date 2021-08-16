@@ -1,37 +1,37 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { CreateLessonArgs } from '../../models/Args/create-lesson.args';
 import { Faculties } from '../../models/Args/faculties-enum';
-import { LessonType } from './lesson.type';
-import { LessonsService } from './lessons.service';
+import { LessonType } from 'src/models/Lessons-Model/lesson.type';
+import { HRLessonsService } from './HR-lessons.service';
 import { UpdateLessonArgs } from '../../models/Args/update-lesson.args';
 
 @Resolver((of) => LessonType)
 export class LessonResolver {
-  constructor(private readonly lessonsService: LessonsService) {}
+  constructor(private readonly HRlessonsService: HRLessonsService) {}
 
   @Query((returns) => [LessonType])
   getLessons() {
-    return this.lessonsService.getLessons();
+    return this.HRlessonsService.getLessons();
   }
 
   @Query((returns) => LessonType)
   getLessonById(@Args('id') id: string) {
-    return this.lessonsService.getLessonById(id);
+    return this.HRlessonsService.getLessonById(id);
   }
 
   @Query((returns) => [LessonType])
   getLessonsByName(@Args('name') name: string) {
-    return this.lessonsService.getLessonsByName(name);
+    return this.HRlessonsService.getLessonsByName(name);
   }
 
   @Query((returns) => [LessonType])
   getLessonsByFaculty(@Args('faculty') faculty: Faculties) {
-    return this.lessonsService.getLessonsByFaculty(faculty);
+    return this.HRlessonsService.getLessonsByFaculty(faculty);
   }
 
   @Query((returns) => LessonType)
   getLessonByCode(@Args('code') code: string) {
-    return this.lessonsService.getLessonByCode(code);
+    return this.HRlessonsService.getLessonByCode(code);
   }
 
   // ==> This is an alternative <== //
@@ -39,12 +39,12 @@ export class LessonResolver {
   //   createLesson(
   //     @Args('createLessonInput') createLessonInput: CreateLessonInput,
   //   ) {
-  //     return this.lessonsService.createLesson(createLessonInput);
+  //     return this.HRlessonsService.createLesson(createLessonInput);
   //   }
 
   @Mutation((returns) => LessonType)
   createLesson(@Args() createLessonArgs: CreateLessonArgs) {
-    return this.lessonsService.createLesson(createLessonArgs);
+    return this.HRlessonsService.createLesson(createLessonArgs);
   }
 
   @Mutation((returns) => LessonType)
@@ -52,11 +52,11 @@ export class LessonResolver {
     @Args('id') id: string,
     @Args() updateLessonArgs: UpdateLessonArgs,
   ) {
-    return this.lessonsService.updateLesson(id, updateLessonArgs);
+    return this.HRlessonsService.updateLesson(id, updateLessonArgs);
   }
 
   @Mutation((returns) => Boolean)
   deleteLesson(@Args('id') id: string) {
-    return this.lessonsService.deleteLesson(id);
+    return this.HRlessonsService.deleteLesson(id);
   }
 }

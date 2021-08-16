@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { LessonModelService } from 'src/models/lesson-model.service';
-import { Lesson } from '../../models/lesson.model';
+import { LessonModelService } from 'src/models/Lessons-Model/lesson-model.service';
+import { Lesson } from 'src/models/Lessons-Model/lesson.model';
 import { CreateLessonArgs } from '../../models/Args/create-lesson.args';
 import { Faculties } from '../../models/Args/faculties-enum';
 import { UpdateLessonArgs } from '../../models/Args/update-lesson.args';
 
 @Injectable()
-export class LessonsService {
+export class HRLessonsService {
   constructor(private readonly lessonModelService: LessonModelService) {}
 
   async getLessons(): Promise<Lesson[]> {

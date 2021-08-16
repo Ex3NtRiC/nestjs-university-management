@@ -5,19 +5,16 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { HRService } from 'src/HR/hr.service';
-import { StudentsService } from 'src/HR/students/students.service';
-import { TeachersService } from 'src/HR/teachers/teachers.service';
 import { AuthCredentialsArg } from './Args/auth-credentials.args';
 import { hash, compare } from 'bcrypt';
-import { Teacher } from '../models/teacher.model';
-import { Student } from '../models/student.model';
-import { HR } from 'src/models/hr.model';
+import { Teacher } from '../models/Teachers-Model/teacher.model';
+import { Student } from '../models/Students-Model/student.model';
+import { HR } from 'src/models/HR-Model/hr.model';
 import { JwtPayload } from './jwt-payload.interface';
 import { Role } from './role.enum';
-import { StudentModelService } from 'src/models/student-model.service';
-import { HRModelService } from 'src/models/hr-model.service';
-import { TeacherModelService } from 'src/models/teacher-model.service';
+import { StudentModelService } from 'src/models/Students-Model/student-model.service';
+import { HRModelService } from 'src/models/HR-Model/hr-model.service';
+import { TeacherModelService } from 'src/models/Teachers-Model/teacher-model.service';
 
 @Injectable()
 export class AuthService {

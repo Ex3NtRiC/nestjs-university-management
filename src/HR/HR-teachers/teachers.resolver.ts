@@ -9,14 +9,14 @@ import {
 import { Faculties } from '../../models/Args/faculties-enum';
 import { CreateTeacherArgs } from '../../models/Args/create-teacher.args';
 import { EnrollTeacherArgs } from '../../models/Args/enroll-teacher.args';
-import { Teacher } from '../../models/teacher.model';
-import { TeacherType } from './teacher.type';
-import { TeachersService } from './teachers.service';
+import { Teacher } from 'src/models/Teachers-Model/teacher.model';
+import { TeacherType } from 'src/models/Teachers-Model/teacher.type';
+import { HRTeachersService } from './HR-teachers.service';
 import { UpdateTeacherArgs } from '../../models/Args/update-teacher.args';
 
 @Resolver((of) => TeacherType)
 export class TeachersResolver {
-  constructor(private readonly teachersService: TeachersService) {}
+  constructor(private readonly teachersService: HRTeachersService) {}
 
   @Query((returns) => [TeacherType])
   getTeachers() {

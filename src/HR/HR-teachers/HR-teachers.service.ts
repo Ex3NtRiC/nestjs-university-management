@@ -1,17 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { Lesson } from '../../models/lesson.model';
-import { LessonsService } from 'src/HR/lessons/lessons.service';
+import { Lesson } from 'src/models/Lessons-Model/lesson.model';
+import { HRLessonsService } from 'src/HR/HR-lessons/HR-lessons.service';
 import { Faculties } from '../../models/Args/faculties-enum';
 import { CreateTeacherArgs } from '../../models/Args/create-teacher.args';
 import { EnrollTeacherArgs } from '../../models/Args/enroll-teacher.args';
-import { Teacher } from '../../models/teacher.model';
-import { TeacherModelService } from 'src/models/teacher-model.service';
+import { Teacher } from 'src/models/Teachers-Model/teacher.model';
+import { TeacherModelService } from 'src/models/Teachers-Model/teacher-model.service';
 
 @Injectable()
-export class TeachersService {
+export class HRTeachersService {
   constructor(
     private readonly teacherModelService: TeacherModelService,
-    private readonly lessonService: LessonsService,
+    private readonly lessonService: HRLessonsService,
   ) {}
   async getTeachers(): Promise<Teacher[]> {
     return this.teacherModelService.getTeachers();

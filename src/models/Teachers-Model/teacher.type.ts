@@ -1,13 +1,11 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-import { LessonType } from 'src/HR/lessons/lesson.type';
+import { LessonType } from '../Lessons-Model/lesson.type';
+import { Faculties } from '../Args/faculties-enum';
 
-@ObjectType('Student')
-export class StudentType {
+@ObjectType('Teacher')
+export class TeacherType {
   @Field((type) => ID)
   id: string;
-
-  @Field()
-  studentID: number;
 
   @Field()
   email: string;
@@ -17,6 +15,9 @@ export class StudentType {
 
   @Field()
   lastName: string;
+
+  @Field()
+  faculty: Faculties;
 
   @Field((type) => [LessonType])
   lessons: LessonType[];

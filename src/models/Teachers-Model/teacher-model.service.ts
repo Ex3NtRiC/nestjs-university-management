@@ -6,9 +6,9 @@ import {
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Role } from 'src/auth/role.enum';
-import { CreateTeacherArgs } from './Args/create-teacher.args';
-import { Faculties } from './Args/faculties-enum';
-import { Lesson } from './lesson.model';
+import { CreateTeacherArgs } from '../Args/create-teacher.args';
+import { Faculties } from '../Args/faculties-enum';
+import { Lesson } from '../Lessons-Model/lesson.model';
 import { Teacher } from './teacher.model';
 
 @Injectable()

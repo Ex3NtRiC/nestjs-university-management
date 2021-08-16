@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { Lesson } from '../../models/lesson.model';
-import { LessonsService } from 'src/HR/lessons/lessons.service';
+import { Lesson } from 'src/models/Lessons-Model/lesson.model';
+import { HRLessonsService } from 'src/HR/HR-lessons/HR-lessons.service';
 import { CreateStudentArgs } from '../../models/Args/create-student.args';
 import { EnrollStudentArgs } from '../../models/Args/entroll-student.args';
-import { Student } from '../../models/student.model';
-import { StudentModelService } from 'src/models/student-model.service';
+import { Student } from 'src/models/Students-Model/student.model';
+import { StudentModelService } from 'src/models/Students-Model/student-model.service';
 
 @Injectable()
-export class StudentsService {
+export class HRStudentsService {
   constructor(
-    private readonly lessonService: LessonsService,
+    private readonly lessonService: HRLessonsService,
     private readonly studentModelService: StudentModelService,
   ) {}
 

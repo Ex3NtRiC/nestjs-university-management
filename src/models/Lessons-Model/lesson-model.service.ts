@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CreateLessonArgs } from './Args/create-lesson.args';
-import { Faculties } from './Args/faculties-enum';
-import { UpdateLessonArgs } from './Args/update-lesson.args';
+import { CreateLessonArgs } from '../Args/create-lesson.args';
+import { Faculties } from '../Args/faculties-enum';
+import { UpdateLessonArgs } from '../Args/update-lesson.args';
 import { Lesson } from './lesson.model';
 
 @Injectable()

@@ -1,20 +1,20 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from 'src/auth/auth.module';
-import { LessonsModule } from 'src/HR/lessons/lessons.module';
+import { HRLessonsModule } from 'src/HR/HR-lessons/HR-lessons.module';
 import { ModelsModule } from 'src/models/models.module';
-import { StudentSchema } from '../../models/student.model';
+import { StudentSchema } from '../../models/Students-Model/student.model';
 import { StudentResolver } from './students.resolver';
-import { StudentsService } from './students.service';
+import { HRStudentsService } from './HR-students.service';
 
 @Module({
   imports: [
     AuthModule,
     ModelsModule,
     MongooseModule.forFeature([{ name: 'Student', schema: StudentSchema }]),
-    LessonsModule,
+    HRLessonsModule,
   ],
-  providers: [StudentsService, StudentResolver],
-  exports: [StudentsService],
+  providers: [HRStudentsService, StudentResolver],
+  exports: [HRStudentsService],
 })
-export class StudentsModule {}
+export class HRStudentsModule {}

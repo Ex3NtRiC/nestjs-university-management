@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { HRSchema } from 'src/models/hr.model';
-import { HRModelService } from './hr-model.service';
-import { LessonModelService } from './lesson-model.service';
-import { LessonSchema } from './lesson.model';
-import { StudentModelService } from './student-model.service';
-import { StudentSchema } from './student.model';
-import { TeacherModelService } from './teacher-model.service';
-import { TeacherSchema } from './teacher.model';
+import { HRSchema } from './HR-Model/hr.model';
+import { HRModelService } from './HR-Model/hr-model.service';
+import { LessonModelService } from './Lessons-Model/lesson-model.service';
+import { LessonSchema } from './Lessons-Model/lesson.model';
+import { StudentModelService } from './Students-Model/student-model.service';
+import { StudentSchema } from './Students-Model/student.model';
+import { TeacherModelService } from './Teachers-Model/teacher-model.service';
+import { TeacherSchema } from './Teachers-Model/teacher.model';
 
 @Module({
   imports: [

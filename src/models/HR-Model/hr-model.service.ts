@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Role } from 'src/auth/role.enum';
-import { CreateHRArgs } from './Args/create-hr.args';
+import { CreateHRArgs } from '../Args/create-hr.args';
 import { HR } from './hr.model';
 
 @Injectable()

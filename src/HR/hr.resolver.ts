@@ -1,6 +1,5 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from 'src/auth/auth.service';
 import { GqlRolesGuard } from 'src/auth/graphql-roles.guard';
 import { GqlAuthGuard } from 'src/auth/jwt-auth.guard';
@@ -8,7 +7,7 @@ import { Role } from 'src/auth/role.enum';
 import { Roles } from 'src/auth/roles.decorator';
 import { CreateHRArgs } from '../models/Args/create-hr.args';
 import { HRService } from './hr.service';
-import { HRType } from './hr.type';
+import { HRType } from '../models/HR-Model/hr.type';
 
 @Resolver((of) => HRType)
 export class HRResolver {
