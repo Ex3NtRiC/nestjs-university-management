@@ -18,10 +18,7 @@ export class StudentModelService {
 
   async getStudents(): Promise<Student[]> {
     const users = await this.studentModel.find();
-    if (users.length > 0) {
-      return users;
-    }
-    throw new NotFoundException();
+    return users;
   }
   // async getStudents(): Promise<Student[]> {
   //   const users = await this.studentModel.find().populate('lessons').exec();
@@ -30,31 +27,20 @@ export class StudentModelService {
 
   async getStudentById(id: string): Promise<Student> {
     const student = await this.studentModel.findById(id);
-    if (student) {
-      return student;
-    }
-    throw new NotFoundException();
+    return student;
   }
 
   async getStudentByStudentId(studentID: number): Promise<Student> {
-    const student = await this.studentModel.findOne({ studentID });
-    if (student) {
-      return student;
-    }
-    throw new NotFoundException();
+    return await this.studentModel.findOne({ studentID });
   }
 
   async getStudentByEmail(email: string): Promise<Student> {
-    const student = await this.studentModel.findOne({ email });
-    if (student) {
-      return student;
-    }
-    throw new NotFoundException();
+    return await this.studentModel.findOne({ email });
   }
 
   async getStudentsByName(search: string): Promise<Student[]> {
     if (!(search.length > 0)) {
-      throw new NotFoundException();
+      return null;
     }
     const students = await this.studentModel.find({
       $or: [
@@ -62,18 +48,12 @@ export class StudentModelService {
         { lastName: { $regex: '.*' + search + '.*', $options: 'i' } },
       ],
     });
-    if (students.length > 0) {
-      return students;
-    }
-    throw new NotFoundException();
+    return students;
   }
 
   async getStudentsByLesson(lessonId): Promise<Student[]> {
     const students = await this.studentModel.find({ lessons: lessonId });
-    if (students.length > 0) {
-      return students;
-    }
-    throw new NotFoundException();
+    return students;
   }
 
   async createStudent(createStudentsArgs: CreateStudentArgs): Promise<Student> {
@@ -95,7 +75,7 @@ export class StudentModelService {
     try {
       const student = await this.studentModel.findOne({ studentID });
       if (!student) {
-        throw new NotFoundException();
+        return null;
       }
       if (firstName) {
         student.firstName = firstName;
@@ -113,14 +93,14 @@ export class StudentModelService {
     try {
       const student: Student = await this.studentModel.findOne({ studentID });
       if (!student || !lesson) {
-        throw new NotFoundException();
+        return null;
       }
       student.lessons.push(lesson._id);
       const s = await student.save();
       return s;
     } catch (err) {
       if (err.response.statusCode === 404) {
-        throw new NotFoundException();
+        return null;
       }
       throw new InternalServerErrorException();
     }

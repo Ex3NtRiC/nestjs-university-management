@@ -26,15 +26,10 @@ export class HRModelService {
   }
 
   async getHRByEmail(email: string): Promise<HR> {
-    console.log('hr-model-service');
-    const hr = await this.hrModel.findOne({ email });
-    if (hr) return hr;
-    throw new NotFoundException();
+    return await this.hrModel.findOne({ email });
   }
 
   async getHRs(): Promise<HR[]> {
-    const hrs = await this.hrModel.find();
-    if (hrs) return hrs;
-    throw new NotFoundException();
+    return await this.hrModel.find();
   }
 }

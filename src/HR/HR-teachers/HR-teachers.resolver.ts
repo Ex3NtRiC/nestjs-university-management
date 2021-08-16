@@ -13,43 +13,50 @@ import { Teacher } from 'src/models/Teachers-Model/teacher.model';
 import { TeacherType } from 'src/models/Teachers-Model/teacher.type';
 import { HRTeachersService } from './HR-teachers.service';
 import { UpdateTeacherArgs } from '../../models/Args/update-teacher.args';
+import { Role } from 'src/auth/role.enum';
+import { GqlAuthGuard } from 'src/auth/jwt-auth.guard';
+import { GqlRolesGuard } from 'src/auth/graphql-roles.guard';
+import { UseGuards } from '@nestjs/common';
+import { Roles } from 'src/auth/roles.decorator';
 
+@Roles(Role.HR)
+@UseGuards(GqlAuthGuard, GqlRolesGuard)
 @Resolver((of) => TeacherType)
-export class TeachersResolver {
+export class HRTeachersResolver {
   constructor(private readonly teachersService: HRTeachersService) {}
 
   @Query((returns) => [TeacherType])
-  getTeachers() {
+  HRgetTeachers() {
     return this.teachersService.getTeachers();
   }
 
   @Query((returns) => TeacherType)
-  getTeacherById(@Args('id') id: string) {
+  HRgetTeacherById(@Args('id') id: string) {
     return this.teachersService.getTeacherById(id);
   }
 
   @Query((returns) => [TeacherType])
-  getTeachersByFaculty(@Args('faculty') faculty: Faculties) {
+  HRgetTeachersByFaculty(@Args('faculty') faculty: Faculties) {
     return this.teachersService.getTeachersByFaculty(faculty);
   }
 
   @Query((returns) => [TeacherType])
-  getTeacherByEmail(@Args('email') email: string) {
+  HRgetTeacherByEmail(@Args('email') email: string) {
     return this.teachersService.getTeachersByEmail(email);
   }
 
   @Query((returns) => [TeacherType])
-  getTeachersByLesson(@Args('lessonCode') code: string) {
-    return this.teachersService.getTeachersByLesson(code);
+  getTeachersByLessonCode(@Args('lessonCode') code: string) {
+    return this.teachersService.getTeachersByLessonCode(code);
   }
 
   @Mutation((returns) => TeacherType)
-  createTeacher(@Args() createStudentArgs: CreateTeacherArgs) {
+  HRcreateTeacher(@Args() createStudentArgs: CreateTeacherArgs) {
     return this.teachersService.createTeacher(createStudentArgs);
   }
 
   @Mutation((returns) => TeacherType)
-  updateTeacher(
+  HRupdateTeacher(
     @Args('email') email: string,
     @Args() updateTeacherArgs: UpdateTeacherArgs,
   ) {
@@ -57,12 +64,12 @@ export class TeachersResolver {
   }
 
   @Mutation((returns) => TeacherType)
-  enrollTeacher(@Args() enrollStudentArgs: EnrollTeacherArgs) {
+  HRenrollTeacher(@Args() enrollStudentArgs: EnrollTeacherArgs) {
     return this.teachersService.enrollTeacher(enrollStudentArgs);
   }
 
   @ResolveField()
-  async lessons(@Parent() teachers: Teacher) {
-    return await this.teachersService.getLessonsById(teachers.lessons);
+  lessons(@Parent() teachers: Teacher) {
+    return this.teachersService.getLessonsById(teachers.lessons);
   }
 }

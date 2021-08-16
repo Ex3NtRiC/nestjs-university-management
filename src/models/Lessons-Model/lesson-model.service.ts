@@ -13,27 +13,15 @@ export class LessonModelService {
   ) {}
 
   async getLessons(): Promise<Lesson[]> {
-    const res = await this.lessonModel.find();
-    if (res.length > 0) {
-      return res;
-    }
-    throw new NotFoundException();
+    return await this.lessonModel.find();
   }
 
   async getLessonById(id: string): Promise<Lesson> {
-    const res = await this.lessonModel.findById(id);
-    if (res) {
-      return res;
-    }
-    throw new NotFoundException();
+    return await this.lessonModel.findById(id);
   }
 
   async getLessonByCode(code: string): Promise<Lesson> {
-    const res = await this.lessonModel.findOne({ code });
-    if (res) {
-      return res;
-    }
-    throw new NotFoundException();
+    return await this.lessonModel.findOne({ code });
   }
 
   async getLessonsByName(name: string): Promise<Lesson[]> {
@@ -71,7 +59,7 @@ export class LessonModelService {
   ): Promise<Lesson> {
     const lesson = await this.lessonModel.findById(id);
     if (!lesson) {
-      throw new NotFoundException();
+      return null;
     }
     const { name, credits, code, faculty } = updateLessonArgs;
     if (name) {
@@ -95,7 +83,7 @@ export class LessonModelService {
       if (res) {
         return true;
       }
-      throw new NotFoundException();
+      return false;
     } catch (err) {
       throw new NotFoundException();
     }

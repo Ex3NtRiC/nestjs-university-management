@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Lesson } from 'src/models/Lessons-Model/lesson.model';
 import { HRLessonsService } from 'src/HR/HR-lessons/HR-lessons.service';
 import { CreateStudentArgs } from '../../models/Args/create-student.args';
@@ -14,50 +14,94 @@ export class HRStudentsService {
   ) {}
 
   async getStudents(): Promise<Student[]> {
-    return this.studentModelService.getStudents();
+    const students = await this.studentModelService.getStudents();
+    if (students.length > 0) {
+      return students;
+    }
+    throw new NotFoundException();
   }
 
   async getLessonsById(lessonsIds: string[]) {
-    return await this.lessonService.getLessonsById(lessonsIds);
+    const lessons = await this.lessonService.getLessonsById(lessonsIds);
+    if (lessons.length > 0) {
+      return lessons;
+    }
+    throw new NotFoundException();
   }
 
   async getStudentById(id: string): Promise<Student> {
-    return this.studentModelService.getStudentById(id);
+    const student = await this.studentModelService.getStudentById(id);
+    if (student) {
+      return student;
+    }
+    throw new NotFoundException();
   }
 
   async getStudentByStudentId(studentID: number): Promise<Student> {
-    return this.studentModelService.getStudentByStudentId(studentID);
+    const student = await this.studentModelService.getStudentByStudentId(
+      studentID,
+    );
+    if (student) {
+      return student;
+    }
+    throw new NotFoundException();
   }
 
   async getStudentByEmail(email: string): Promise<Student> {
-    return this.studentModelService.getStudentByEmail(email);
+    const student = await this.studentModelService.getStudentByEmail(email);
+    if (student) {
+      return student;
+    }
+    throw new NotFoundException();
   }
 
   async getStudentsByName(search: string): Promise<Student[]> {
-    return this.studentModelService.getStudentsByName(search);
+    const student = await this.studentModelService.getStudentsByName(search);
+    if (student) {
+      return student;
+    }
+    throw new NotFoundException();
   }
 
   async getStudentsByLesson(lessonCode: string): Promise<Student[]> {
     const lesson = await this.lessonService.getLessonByCode(lessonCode);
-    const lessonId = lesson._id;
-    return this.studentModelService.getStudentsByLesson(lessonId);
+    if (lesson) {
+      const lessonId = lesson._id;
+      const students = await this.studentModelService.getStudentsByLesson(
+        lessonId,
+      );
+      if (students.length > 0) {
+        return students;
+      }
+      throw new NotFoundException();
+    }
+    throw new NotFoundException();
   }
 
   async createStudent(createStudentsArgs: CreateStudentArgs): Promise<Student> {
-    return this.studentModelService.createStudent(createStudentsArgs);
+    const student = await this.studentModelService.createStudent(
+      createStudentsArgs,
+    );
+    if (student) {
+      return student;
+    }
+    throw new NotFoundException();
   }
 
   async updateStudent(studentID, updateStudentArgs): Promise<Student> {
-    return this.studentModelService.updateStudent(studentID, updateStudentArgs);
+    const student = await this.studentModelService.updateStudent(
+      studentID,
+      updateStudentArgs,
+    );
+    if (student) {
+      return student;
+    }
+    throw new NotFoundException();
   }
 
   async enrollStudent(enrollStudentArgs: EnrollStudentArgs): Promise<Student> {
     const { studentID, lessonCode } = enrollStudentArgs;
     const lesson: Lesson = await this.lessonService.getLessonByCode(lessonCode);
     return this.studentModelService.enrollStudent(studentID, lesson);
-  }
-
-  private async getMaxStudentID() {
-    return this.studentModelService.getMaxStudentID();
   }
 }

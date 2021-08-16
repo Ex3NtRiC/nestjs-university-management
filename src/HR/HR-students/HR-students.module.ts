@@ -4,7 +4,7 @@ import { AuthModule } from 'src/auth/auth.module';
 import { HRLessonsModule } from 'src/HR/HR-lessons/HR-lessons.module';
 import { ModelsModule } from 'src/models/models.module';
 import { StudentSchema } from '../../models/Students-Model/student.model';
-import { StudentResolver } from './students.resolver';
+import { HRStudentsResolver } from './HR-students.resolver';
 import { HRStudentsService } from './HR-students.service';
 
 @Module({
@@ -14,7 +14,7 @@ import { HRStudentsService } from './HR-students.service';
     MongooseModule.forFeature([{ name: 'Student', schema: StudentSchema }]),
     HRLessonsModule,
   ],
-  providers: [HRStudentsService, StudentResolver],
+  providers: [HRStudentsService, HRStudentsResolver],
   exports: [HRStudentsService],
 })
 export class HRStudentsModule {}

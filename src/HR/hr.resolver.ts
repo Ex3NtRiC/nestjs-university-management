@@ -1,14 +1,15 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { AuthService } from 'src/auth/auth.service';
-import { GqlRolesGuard } from 'src/auth/graphql-roles.guard';
 import { GqlAuthGuard } from 'src/auth/jwt-auth.guard';
 import { Role } from 'src/auth/role.enum';
 import { Roles } from 'src/auth/roles.decorator';
 import { CreateHRArgs } from '../models/Args/create-hr.args';
 import { HRService } from './hr.service';
 import { HRType } from '../models/HR-Model/hr.type';
-
+import { GqlRolesGuard } from 'src/auth/graphql-roles.guard';
+@Roles(Role.HR)
+@UseGuards(GqlAuthGuard, GqlRolesGuard)
 @Resolver((of) => HRType)
 export class HRResolver {
   constructor(
@@ -17,18 +18,16 @@ export class HRResolver {
   ) {}
 
   @Query((returns) => HRType)
-  getHRByEmail(@Args('email') email: string) {
+  HRgetHRByEmail(@Args('email') email: string) {
     return this.hrService.getHRByEmail(email);
   }
 
-  @Roles(Role.HR)
-  @UseGuards(GqlAuthGuard, GqlRolesGuard)
   @Query((returns) => [HRType])
-  getHRs() {
+  HRgetHRs() {
     return this.hrService.getHRs();
   }
   @Mutation((returns) => HRType)
-  createHR(@Args() createHRArgs: CreateHRArgs) {
+  HRcreateHR(@Args() createHRArgs: CreateHRArgs) {
     return this.hrService.createHR(createHRArgs);
   }
 }

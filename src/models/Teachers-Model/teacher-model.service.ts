@@ -18,8 +18,7 @@ export class TeacherModelService {
   ) {}
 
   async getTeachers(): Promise<Teacher[]> {
-    const users = await this.teacherModel.find();
-    return users;
+    return await this.teacherModel.find();
   }
   // async getTeachers(): Promise<Teacher[]> {
   //   const users = await this.teacherModel.find().populate('lessons').exec();
@@ -27,16 +26,12 @@ export class TeacherModelService {
   // }
 
   async getTeacherById(id: string): Promise<Teacher> {
-    const teacher = await this.teacherModel.findById(id);
-    if (teacher) {
-      return teacher;
-    }
-    throw new NotFoundException();
+    return await this.teacherModel.findById(id);
   }
 
   async getTeachersByName(search: string): Promise<Teacher[]> {
     if (!(search.length > 0)) {
-      throw new NotFoundException();
+      return null;
     }
     const teachers = await this.teacherModel.find({
       $or: [
@@ -44,46 +39,34 @@ export class TeacherModelService {
         { lastName: { $regex: '.*' + search + '.*', $options: 'i' } },
       ],
     });
-    if (teachers.length > 0) {
-      return teachers;
-    }
-    throw new NotFoundException();
+    return teachers;
   }
 
   async getTeachersByFaculty(faculty: Faculties): Promise<Teacher[]> {
-    const teachers = await this.teacherModel.find({ faculty });
-    if (teachers.length > 0) {
-      return teachers;
-    }
-    throw new NotFoundException();
+    return await this.teacherModel.find({ faculty });
   }
 
   async getTeachersByEmail(email: string): Promise<Teacher[]> {
     const teachers = await this.teacherModel.find({
       email: { $regex: '.*' + email + '.*', $options: 'i' },
     });
-    if (teachers.length > 0) {
-      return teachers;
-    }
-    throw new NotFoundException();
+    return teachers;
   }
 
   async getTeacherByEmail(email: string): Promise<Teacher> {
     const teacher = await this.teacherModel.findOne({
       email,
     });
-    if (teacher) {
-      return teacher;
-    }
-    throw new NotFoundException();
+    return teacher;
   }
 
   async getTeachersByLesson(lessonId): Promise<Teacher[]> {
     const teachers = await this.teacherModel.find({ lessons: lessonId });
-    if (teachers.length > 0) {
-      return teachers;
-    }
-    throw new NotFoundException();
+    return teachers;
+  }
+
+  async getTeacherByLesson(lessonId): Promise<Teacher> {
+    return this.teacherModel.findOne({ lessons: lessonId });
   }
 
   async createTeacher(createTeachersArgs: CreateTeacherArgs): Promise<Teacher> {
@@ -108,7 +91,7 @@ export class TeacherModelService {
     try {
       const teacher = await this.teacherModel.findOne({ email });
       if (!teacher) {
-        throw new NotFoundException();
+        return null;
       }
       if (firstName) {
         teacher.firstName = firstName;

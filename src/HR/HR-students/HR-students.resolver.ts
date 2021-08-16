@@ -12,23 +12,30 @@ import { Student } from 'src/models/Students-Model/student.model';
 import { StudentType } from 'src/models/Students-Model/student.type';
 import { HRStudentsService } from './HR-students.service';
 import { UpdateStudentArgs } from '../../models/Args/update-student.args';
+import { Role } from 'src/auth/role.enum';
+import { GqlAuthGuard } from 'src/auth/jwt-auth.guard';
+import { GqlRolesGuard } from 'src/auth/graphql-roles.guard';
+import { UseGuards } from '@nestjs/common';
+import { Roles } from 'src/auth/roles.decorator';
 
+@Roles(Role.HR)
+@UseGuards(GqlAuthGuard, GqlRolesGuard)
 @Resolver((of) => StudentType)
-export class StudentResolver {
+export class HRStudentsResolver {
   constructor(private readonly studentsService: HRStudentsService) {}
 
   @Query((returns) => [StudentType])
-  getStudents() {
+  HRgetStudents() {
     return this.studentsService.getStudents();
   }
 
   @Query((returns) => StudentType)
-  getStudentById(@Args('id') id: string) {
+  HRgetStudentById(@Args('id') id: string) {
     return this.studentsService.getStudentById(id);
   }
 
   @Query((returns) => StudentType)
-  getStudentByStudentId(@Args('id') id: number) {
+  HRgetStudentByStudentId(@Args('id') id: number) {
     return this.studentsService.getStudentByStudentId(id);
   }
 
@@ -38,22 +45,22 @@ export class StudentResolver {
   }
 
   @Query((returns) => [StudentType])
-  getStudentByName(@Args('name') name: string) {
+  HRgetStudentByName(@Args('name') name: string) {
     return this.studentsService.getStudentsByName(name);
   }
 
   @Query((returns) => [StudentType])
-  getStudentsByLesson(@Args('lessonCode') code: string) {
+  HRgetStudentsByLesson(@Args('lessonCode') code: string) {
     return this.studentsService.getStudentsByLesson(code);
   }
 
   @Mutation((returns) => StudentType)
-  createStudent(@Args() createStudentArgs: CreateStudentArgs) {
+  HRcreateStudent(@Args() createStudentArgs: CreateStudentArgs) {
     return this.studentsService.createStudent(createStudentArgs);
   }
 
   @Mutation((returns) => StudentType)
-  updateStudent(
+  HRupdateStudent(
     @Args('studentID') studentID: number,
     @Args() updateStudentArgs: UpdateStudentArgs,
   ) {
@@ -61,12 +68,12 @@ export class StudentResolver {
   }
 
   @Mutation((returns) => StudentType)
-  enrollStudent(@Args() enrollStudentArgs: EnrollStudentArgs) {
+  HRenrollStudent(@Args() enrollStudentArgs: EnrollStudentArgs) {
     return this.studentsService.enrollStudent(enrollStudentArgs);
   }
 
   @ResolveField()
-  async lessons(@Parent() students: Student) {
-    return await this.studentsService.getLessonsById(students.lessons);
+  lessons(@Parent() students: Student) {
+    return this.studentsService.getLessonsById(students.lessons);
   }
 }
