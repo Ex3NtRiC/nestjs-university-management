@@ -1,9 +1,8 @@
 import { ArgsType, Field } from '@nestjs/graphql';
-import { IsEnum, IsOptional, MaxLength, MinLength } from 'class-validator';
-import { Faculties } from './faculties-enum';
+import { IsOptional, MaxLength, MinLength } from 'class-validator';
 
 @ArgsType()
-export class UpdateTeacherArgs {
+export class TRUpdateTeacherArgs {
   @IsOptional()
   @MinLength(3)
   @MaxLength(30)
@@ -17,7 +16,8 @@ export class UpdateTeacherArgs {
   lastName?: string;
 
   @IsOptional()
-  @IsEnum(Faculties)
+  @MinLength(3)
+  @MaxLength(30)
   @Field({ nullable: true })
-  faculty?: Faculties;
+  password?: string;
 }

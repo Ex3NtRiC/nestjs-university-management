@@ -12,7 +12,7 @@ import { EnrollTeacherArgs } from '../../models/Args/enroll-teacher.args';
 import { Teacher } from 'src/models/Teachers-Model/teacher.model';
 import { TeacherType } from 'src/models/Teachers-Model/teacher.type';
 import { HRTeachersService } from './HR-teachers.service';
-import { UpdateTeacherArgs } from '../../models/Args/update-teacher.args';
+import { HRUpdateTeacherArgs } from '../../models/Args/HR-update-teacher.args';
 import { Role } from 'src/auth/role.enum';
 import { GqlAuthGuard } from 'src/auth/jwt-auth.guard';
 import { GqlRolesGuard } from 'src/auth/graphql-roles.guard';
@@ -58,7 +58,7 @@ export class HRTeachersResolver {
   @Mutation((returns) => TeacherType)
   HRupdateTeacher(
     @Args('email') email: string,
-    @Args() updateTeacherArgs: UpdateTeacherArgs,
+    @Args() updateTeacherArgs: HRUpdateTeacherArgs,
   ) {
     return this.teachersService.updateTeacher(email, updateTeacherArgs);
   }

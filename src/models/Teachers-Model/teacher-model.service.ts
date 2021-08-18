@@ -1,10 +1,12 @@
 import {
+  ConsoleLogger,
   Injectable,
   InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { hash } from 'bcrypt';
+import { Model, Types } from 'mongoose';
 import { Role } from 'src/auth/role.enum';
 import { CreateTeacherArgs } from '../Args/create-teacher.args';
 import { Faculties } from '../Args/faculties-enum';
@@ -86,8 +88,29 @@ export class TeacherModelService {
     return await teacher.save();
   }
 
-  async updateTeacher(email, updateTeacherArgs): Promise<Teacher> {
-    const { firstName, lastName, faculty } = updateTeacherArgs;
+  async hasLesson(email: string, lessonId: Types.ObjectId): Promise<boolean> {
+    console.log(lessonId);
+    const lesson = lessonId.toString();
+    console.log(lesson);
+    const teacher: Teacher = await this.teacherModel.findOne({
+      email,
+      lessons: lesson,
+    });
+    if (!teacher) {
+      return false;
+    }
+    return true;
+  }
+
+  async updateTeacher(email: string, updateTeacherArgs): Promise<Teacher> {
+    const { firstName, lastName } = updateTeacherArgs;
+    let password, faculty;
+    if (updateTeacherArgs.hasOwnProperty('password')) {
+      password = updateTeacherArgs.password;
+    }
+    if (updateTeacherArgs.hasOwnProperty('faculty')) {
+      faculty = updateTeacherArgs.faculty;
+    }
     try {
       const teacher = await this.teacherModel.findOne({ email });
       if (!teacher) {
@@ -101,6 +124,17 @@ export class TeacherModelService {
       }
       if (faculty) {
         teacher.faculty = faculty;
+      }
+      if (password) {
+        try {
+          const hashedPw = await hash(password, 12);
+          teacher.password = hashedPw;
+        } catch (err) {
+          console.log('problem hashing the password');
+          throw new InternalServerErrorException(
+            'problem hashing the password',
+          );
+        }
       }
       return teacher.save();
     } catch (err) {
