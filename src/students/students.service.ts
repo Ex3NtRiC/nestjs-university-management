@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { UpdateStudentArgs } from 'src/models/Args/update-student.args';
+import { STUpdateStudentArgs } from 'src/models/Args/ST-update-student.args';
 import { LessonModelService } from 'src/models/Lessons-Model/lesson-model.service';
 import { Lesson } from 'src/models/Lessons-Model/lesson.model';
 import { StudentModelService } from 'src/models/Students-Model/student-model.service';
@@ -68,7 +68,7 @@ export class StudentsService {
 
   async updateStudent(
     studentID: number,
-    updateStudentArgs: UpdateStudentArgs,
+    updateStudentArgs: STUpdateStudentArgs,
   ): Promise<Student> {
     const student = await this.studentModelService.updateStudent(
       studentID,

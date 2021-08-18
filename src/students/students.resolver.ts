@@ -12,7 +12,7 @@ import { GqlRolesGuard } from 'src/auth/graphql-roles.guard';
 import { GqlAuthGuard } from 'src/auth/jwt-auth.guard';
 import { Role } from 'src/auth/role.enum';
 import { Roles } from 'src/auth/roles.decorator';
-import { UpdateStudentArgs } from 'src/models/Args/update-student.args';
+import { STUpdateStudentArgs } from 'src/models/Args/ST-update-student.args';
 import { LessonType } from 'src/models/Lessons-Model/lesson.type';
 import { Student } from 'src/models/Students-Model/student.model';
 import { StudentType } from 'src/models/Students-Model/student.type';
@@ -48,7 +48,7 @@ export class StudentsResolver {
   @Mutation((returns) => StudentType)
   STupdateStudent(
     @CurrentUser() user: Student,
-    @Args() updateStudentArgs: UpdateStudentArgs,
+    @Args() updateStudentArgs: STUpdateStudentArgs,
   ) {
     const studentID: number = parseInt(user.email.split('@')[0]);
     return this.studentsService.updateStudent(studentID, updateStudentArgs);

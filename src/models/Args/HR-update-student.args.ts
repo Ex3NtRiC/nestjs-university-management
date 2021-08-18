@@ -2,7 +2,7 @@ import { ArgsType, Field } from '@nestjs/graphql';
 import { IsOptional, MaxLength, MinLength } from 'class-validator';
 
 @ArgsType()
-export class UpdateStudentArgs {
+export class HRUpdateStudentArgs {
   @IsOptional()
   @MinLength(3)
   @MaxLength(30)

@@ -37,7 +37,7 @@ export const StudentSchema = new Schema({
 export interface Student extends Document {
   studentID: number;
   email: string;
-  passowrd: string;
+  password: string;
   firstName: string;
   lastName: string;
   lessons: string[];

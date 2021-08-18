@@ -7,9 +7,11 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Role } from 'src/auth/role.enum';
 import { CreateStudentArgs } from '../Args/create-student.args';
+import { HRUpdateStudentArgs } from '../Args/HR-update-student.args';
+import { STUpdateStudentArgs } from '../Args/ST-update-student.args';
 import { Lesson } from '../Lessons-Model/lesson.model';
 import { Student } from './student.model';
-
+import { hash } from 'bcrypt';
 @Injectable()
 export class StudentModelService {
   constructor(
@@ -70,8 +72,15 @@ export class StudentModelService {
     return await student.save();
   }
 
-  async updateStudent(studentID, updateStudentArgs): Promise<Student> {
+  async updateStudent(
+    studentID: number,
+    updateStudentArgs: STUpdateStudentArgs,
+  ): Promise<Student> {
     const { firstName, lastName } = updateStudentArgs;
+    let password;
+    if (updateStudentArgs.hasOwnProperty('password')) {
+      password = updateStudentArgs.password;
+    }
     try {
       const student = await this.studentModel.findOne({ studentID });
       if (!student) {
@@ -82,6 +91,17 @@ export class StudentModelService {
       }
       if (lastName) {
         student.lastName = lastName;
+      }
+      if (password) {
+        try {
+          const hashedPw = await hash(password, 12);
+          student.password = hashedPw;
+        } catch (err) {
+          console.log('problem hashing the password');
+          throw new InternalServerErrorException(
+            'problem hashing the password',
+          );
+        }
       }
       return student.save();
     } catch (err) {

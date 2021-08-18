@@ -88,7 +88,7 @@ export class AuthService {
     } else if (email.includes('hr')) {
       person = (await this.hrService.getHRByEmail(email)) as HR;
       roles = [Role.HR];
-    } else if (email.includes('birzeit.edu')) {
+    } else if (email.includes('school.edu')) {
       person = (await this.teachersService.getTeacherByEmail(email)) as Teacher;
       roles = [Role.Teacher];
     } else {

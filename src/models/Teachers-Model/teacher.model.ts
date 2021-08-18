@@ -7,6 +7,9 @@ export const TeacherSchema = new Schema({
     type: String,
     required: true,
   },
+  password: {
+    type: String,
+  },
   firstName: {
     type: String,
     required: true,

@@ -5,6 +5,7 @@ import { CreateStudentArgs } from '../../models/Args/create-student.args';
 import { EnrollStudentArgs } from '../../models/Args/entroll-student.args';
 import { Student } from 'src/models/Students-Model/student.model';
 import { StudentModelService } from 'src/models/Students-Model/student-model.service';
+import { HRUpdateStudentArgs } from 'src/models/Args/HR-update-student.args';
 
 @Injectable()
 export class HRStudentsService {
@@ -88,7 +89,10 @@ export class HRStudentsService {
     throw new NotFoundException();
   }
 
-  async updateStudent(studentID, updateStudentArgs): Promise<Student> {
+  async updateStudent(
+    studentID: number,
+    updateStudentArgs: HRUpdateStudentArgs,
+  ): Promise<Student> {
     const student = await this.studentModelService.updateStudent(
       studentID,
       updateStudentArgs,
